@@ -15,7 +15,7 @@
 
 /* Version of XFer in C. Initial version is 4.0 to distinguish from original
    XFer, which reached version 3.0 */
-#define XFER_VERSION 5.3
+#define XFER_VERSION 5.4
 
 #include <stdarg.h>
 #ifdef _WIN32

@@ -26,11 +26,13 @@ void usage(void)
   fprintf(stderr, "XFer in C version %.2f\n"
           "Copyright Mark de Weger 1997, Angus J. C. Duggan 1999,\n"
           "          Jon Welch 2005, Greg Cook 2013, Robert Hargreaves 2015\n"
-          "Usage: %s [-b baud] [-c port] [-t timeout] [-h ctsrts|dsrdtr|xonxoff] [-d on|off] [-w on|off] [-1|-1st] [-r]\n"
+    	  "          Evan R. Venn 2024\n\n"
+
+          "Usage: %s [-b baud] [-c port] [-t timeout] [-h ctsrts|dsrdtr] [-d on|off] [-w on|off] [-1|-1st] [-r]\n"
           "\t-b baud\t\tset baud rate (default 9600)\n"
           "\t-c port\t\tset COM port\n"
           "\t-t timeout\tCOM port timeout in 1/100 seconds\n"
-          "\t-h ctsrts|dsrdtr|xonxoff\tset handshake method\n"
+	  "\t-h ctsrts|dsrdtr\tset handshake method (default dsrdtr)\n"
           "\t-d on|off\tallow or disallow directory usage\n"
           "\t-w on|off\tallow or disallow wildcard usage\n"
           "\t-1|1st\t\tfirst connection to BBC, download xfer.bas\n"
@@ -295,10 +297,11 @@ bool strtobool(char *str, bool *value)
 
 bool strtohandshake(char *str, handshake_t *value)
 {
-  if ( strcmp(str, "xonxoff") == 0 || strcmp(str, "xon_xoff") == 0 ) {
-    *value = HANDSHAKE_DSR_DTR ; /* Xon/Xoff escaping not implemented */
-    return true ;
-  } else if ( strcmp(str, "ctsrts") == 0 || strcmp(str, "cts_rts") == 0 ) {
+	//  if ( strcmp(str, "xonxoff") == 0 || strcmp(str, "xon_xoff") == 0 ) {
+    // *value = HANDSHAKE_DSR_DTR ; /* Xon/Xoff escaping not implemented */
+    // return true ;
+  //  } else 
+	if ( strcmp(str, "ctsrts") == 0 || strcmp(str, "cts_rts") == 0 ) {
     *value = HANDSHAKE_CTS_RTS ;
     return true ;
   } else if ( strcmp(str, "dsrdtr") == 0 || strcmp(str, "dsr_dtr") == 0 ) {
@@ -420,6 +423,8 @@ int main(int argc, char *argv[])
          "\n"
          "Copyright (C) 1996-1997 Mark de Weger, 1999 Angus Duggan,\n"
          "              2005 Jon Welch, 2013 Greg Cook, 2015 Robert Hargreaves\n"
+    	 "              2024 Evan R. Venn\n"
+
          "\n", program) ;
 
   if ( firsttime ) {
